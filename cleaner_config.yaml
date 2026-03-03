@@ -15,8 +15,34 @@ patterns_and_insertions:
             "description" : "Replace figcomp",
             # "strip_whitespace": n 
         },
+        {
+            "pattern": '(?s)(?<!\\newif)\\ifshowcameraready\b(?:[ \t]*\r?\n)?(?P<keep>.*?)(?:\r?\n)?[ \t]*\\else\b.*?\\fi\b',
+            "insertion": '{keep}',
+            "description": "Keep true branch of ifshowcameraready",
+            "strip_whitespace": False 
+        },
+        {
+            "pattern": '(?s)(?<!\\newif)\\ifshowextended\b(?:[ \t]*\r?\n)?(?P<keep>.*?)(?:\r?\n)?[ \t]*\\else\b.*?\\fi\b',
+            "insertion": '{keep}',
+            "description": "Keep true branch of ifshowextended",
+            "strip_whitespace": False 
+        }
     ]
-verbose: False
+# These need to be specified in the command line
+verbose: True
+compress_pdf: True
+keep_bib: True
+
+# if_exceptions: ['showcameraready', 'ifshowextended']
 commands_to_delete: [
-    '\\todo',
+    'exthide',
+    # 'newcommand'
 ]
+commands_only_to_delete: [
+    'extshow',
+    'prhide',
+]
+
+images_allowlist: {
+    'images/particle_filter_vid.pdf': 100000
+}
